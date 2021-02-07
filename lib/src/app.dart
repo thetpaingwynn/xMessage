@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'pages/home_page.dart';
+import 'pages/chat_list_page.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,10 +8,18 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'xMessage',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
+        accentColor: Colors.blueAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        accentColor: Colors.blueAccent,
+        appBarTheme: const AppBarTheme(elevation: 0),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        brightness: Brightness.dark,
+      ),
+      home: ChatListPage(),
     );
   }
 }
