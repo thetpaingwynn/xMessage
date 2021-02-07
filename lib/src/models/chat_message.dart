@@ -1,5 +1,17 @@
 class ChatMessage {
   String address;
+  String contact;
   String body;
-  int dateSent;
+  DateTime dateSent;
+  bool isRead;
+  ChatMessageKind kind;
+  int chatId;
+
+  bool get isReceived => kind == ChatMessageKind.Received;
+}
+
+enum ChatMessageKind {
+  Sent,
+  Received,
+  Draft,
 }

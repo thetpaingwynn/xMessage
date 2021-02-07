@@ -410,13 +410,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
-  platform:
-    dependency: transitive
-    description:
-      name: platform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.1"
   pool:
     dependency: transitive
     description:
@@ -513,13 +506,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.1"
-  telephony:
-    dependency: "direct main"
-    description:
-      name: telephony
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.7"
   term_glyph:
     dependency: transitive
     description:
@@ -585,4 +571,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0 <2.11.0"
-  flutter: ">=1.10.0"
+  flutter: ">=0.1.2"

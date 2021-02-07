@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 import '../stores/chat_list_page_store.dart';
-import '../mixins/list_page_feature.dart';
+import '../mixins/basic_page_feature.dart';
 import 'package:xmessage/src/models/chat.dart';
 
 import 'chat_page.dart';
@@ -16,7 +16,7 @@ class ChatListPage extends StatefulWidget {
   _ChatListPageState createState() => _ChatListPageState();
 }
 
-class _ChatListPageState extends State<ChatListPage> with ListPageFeature {
+class _ChatListPageState extends State<ChatListPage> with BasicPageFeature {
   final _store = GetIt.instance.get<ChatListPageStore>();
 
   @override
@@ -32,15 +32,19 @@ class _ChatListPageState extends State<ChatListPage> with ListPageFeature {
         appBar: AppBar(
           title: const Text('xMessage'),
         ),
-        body: Scrollbar(
-          child: Observer(builder: (_) {
-            return ListView.separated(
-              shrinkWrap: true,
-              itemCount: _store.chats.length,
-              separatorBuilder: (_, index) => Divider(height: 1),
-              itemBuilder: (_, index) => _chatListTile(_store.chats[index]),
-            );
-          }),
+        body: RefreshIndicator(
+          onRefresh: () => _store.load(),
+          child: Scrollbar(
+            child: Observer(builder: (_) {
+              return ListView.separated(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: _store.chats.length,
+                separatorBuilder: (_, index) => Divider(height: 1),
+                itemBuilder: (_, index) => _chatListTile(_store.chats[index]),
+              );
+            }),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.chat),
@@ -66,15 +70,15 @@ class _ChatListPageState extends State<ChatListPage> with ListPageFeature {
           ),
         ),
       ),
-      title: Text(chat.title ?? ''),
+      title: Text(chat.address ?? ''),
       subtitle: Text(chat.lastMessage ?? '', maxLines: 1),
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => ChatPage(chat: chat),
-            settings: RouteSettings(name: 'chat_list_page/chat_page'),
-          ),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (BuildContext context) => ChatPage(chatId: chat.chatId),
+        //     settings: RouteSettings(name: 'chat_list_page/chat_page'),
+        //   ),
+        // );
       },
     );
   }

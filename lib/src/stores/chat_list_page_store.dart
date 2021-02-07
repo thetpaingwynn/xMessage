@@ -1,10 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-import 'package:telephony/telephony.dart';
-import 'package:collection/collection.dart';
 
+import '../services/sms_service.dart';
 import '../models/chat.dart';
-import '../extensions.dart';
 
 part 'chat_list_page_store.g.dart';
 
@@ -12,13 +10,14 @@ part 'chat_list_page_store.g.dart';
 class ChatListPageStore = _ChatListPageStoreBase with _$ChatListPageStore;
 
 abstract class _ChatListPageStoreBase with Store {
-  final Telephony telephony = Telephony.instance;
+  final SmsService _smsService;
 
   @observable
   List<Chat> chats = List<Chat>();
 
+  _ChatListPageStoreBase(this._smsService);
+
   Future load() async {
-    final messages = await telephony.getInboxSms();
-    chats = groupBy(messages, (x) => x.address).map((k, v) => MapEntry(k, Chat(k, v.toChatMessages()))).values.toList();
+    chats = await _smsService.getChats();
   }
 }

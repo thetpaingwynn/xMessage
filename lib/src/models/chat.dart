@@ -1,10 +1,9 @@
 import 'chat_message.dart';
 
 class Chat {
-  String title;
-  List<ChatMessage> messages;
+  int chatId;
+  String address;
+  List<ChatMessage> messages = <ChatMessage>[];
 
-  Chat(this.title, [this.messages]);
-
-  String get lastMessage => messages.last?.body ?? '';
+  String get lastMessage => messages.first?.body ?? '';
 }
