@@ -21,6 +21,7 @@ dependencies:
   mobx: ^1.2.1+2
   flutter_mobx: ^1.1.0+2
 
+  sms: ^0.2.4
   telephony: ^0.0.7
   collection: ^1.14.13
 

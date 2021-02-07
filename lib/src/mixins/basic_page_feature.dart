@@ -3,7 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 typedef Future<dynamic> FutureAction();
 
-mixin ListPageFeature<T extends StatefulWidget> on State<T> {
+mixin BasicPageFeature<T extends StatefulWidget> on State<T> {
   bool inAsyncCall = false;
 
   Future<bool> progressCall(FutureAction call) async {
@@ -62,8 +62,8 @@ mixin ListPageFeature<T extends StatefulWidget> on State<T> {
     return result ?? false;
   }
 
-  void showMessage(String message) {
-    Scaffold.of(context).showSnackBar(
+  void showMessage(ScaffoldState state, String message) {
+    state.showSnackBar(
       SnackBar(
         content: Row(
           children: [
@@ -76,8 +76,8 @@ mixin ListPageFeature<T extends StatefulWidget> on State<T> {
     );
   }
 
-  void showError(String message) {
-    Scaffold.of(context).showSnackBar(
+  void showError(ScaffoldState state, String message) {
+    state.showSnackBar(
       SnackBar(
         content: Row(
           children: [
